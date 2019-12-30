@@ -34,4 +34,3 @@ void ScanStack(Stack*);   //遍历所有的元素，并且打印出来
 
 
 
-

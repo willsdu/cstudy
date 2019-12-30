@@ -48,4 +48,3 @@ void Scan(LinkedList *head);
 
 //删除所有的节点
 void Release(LinkedList *head);
-

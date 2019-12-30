@@ -1,5 +1,6 @@
 #include "arrayList.h"
 #include "stack.h"
+#include "achieve.h"
 
 void TestList(){
     LinkedList *head=NewList(5, 4, 5, 5, 5, 6);
@@ -36,11 +37,8 @@ void TestStack(){
     
 }
 
+
 int main()
 {
-//    TestList();
-//    TestStack();
-    
-    
-   
+    TestStack();
 }

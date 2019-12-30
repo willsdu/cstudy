@@ -1,0 +1,79 @@
+#!/bin/sh
+
+command=$1
+
+# 递归读取目录下的文件夹
+function ReadDir() {
+    arg=$1
+    result=()
+
+    if [ -f $arg ]; then
+        return
+    else
+        result=(${result[*]} $arg)
+    fi
+
+    flist=$(ls $arg)
+
+    for f in $flist; do
+        if [ -d $arg/$f ]; then
+            result=(${result[*]} $(ReadDir $arg/$f))
+        fi
+    done
+
+    echo ${result[*]}
+}
+
+# 递归读取目录下的文件
+function ReadFile() {
+    result=()
+
+    arg=$1
+    if [ -f $arg ]; then
+        echo $arg
+        return
+    fi
+
+    flist=$(ls $arg)
+
+    for f in $flist; do
+        if [ -d $arg/$f ]; then
+            result=(${result[*]} $(ReadFile $arg/$f))
+        else
+            result=(${result[*]} $arg/$f)
+        fi
+    done
+
+    echo ${result[*]}
+}
+
+cwd=$(
+    cd $(dirname $0)
+    pwd
+)
+
+#获取文件目录
+dirs=()
+
+for d in $(ReadDir $cwd); do
+    dirs=(${dirs[*]} "-I "$d)
+done
+
+#获取文件
+files=()
+for f in $(ReadFile $cwd); do
+    reg='\.c$'
+    if [[ "$f" =~ $reg ]]; then
+        files=(${files[*]} $f)
+    fi
+done
+
+gcc ${dirs[*]} ${files[*]} -o study
+
+
+
+if [ $command == "run" ]; then
+    ./study
+    rm study
+fi
+

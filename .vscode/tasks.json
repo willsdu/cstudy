@@ -5,15 +5,8 @@
             "label": "gcc build active file",
             "command": "/usr/bin/gcc",
             "args": [
-                "-I",
-                "${workspaceFolder}/cstudy/cstructure/",
-                "-I",
-                "${workspaceFolder}/cstudy/cachieve/",
                 "-g",
                 "${file}",
-                "${workspaceFolder}/cstudy/cachieve/chap1.c",
-                "${workspaceFolder}/cstudy/cstructure/arrayList.c",
-                "${workspaceFolder}/cstudy/cstructure/stack.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
